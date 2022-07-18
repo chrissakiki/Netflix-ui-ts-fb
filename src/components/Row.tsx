@@ -6,6 +6,7 @@ interface Props {
   title: string;
   fetchURL: string;
 }
+
 const Row: FC<Props> = ({ title, fetchURL }) => {
   const [movies, setMovies] = useState<string[]>([]);
 
@@ -39,7 +40,7 @@ const Row: FC<Props> = ({ title, fetchURL }) => {
           ref={slider}
           className="w-full h-full overflow-x-scroll whitespace-nowrap  scroll-smooth scrollbar-hide relative"
         >
-          {movies?.map((item: any, i: number) => (
+          {movies?.map((item, i) => (
             <Movie key={i} item={item} />
           ))}
         </div>

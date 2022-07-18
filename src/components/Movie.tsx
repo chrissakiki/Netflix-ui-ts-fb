@@ -4,11 +4,11 @@ import { useAppContext } from "../AppProvider";
 import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
-interface props {
+interface Props {
   item: any;
 }
 
-const Movie: FC<props> = ({ item }) => {
+const Movie: FC<Props> = ({ item }) => {
   const { user } = useAppContext();
 
   const [like, setLike] = useState<boolean>(false);
