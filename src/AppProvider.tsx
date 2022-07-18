@@ -44,7 +44,6 @@ const AppProvider: FC<Props> = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
       if (currentUser) {
         setUser(currentUser);
-        console.log(user);
       } else {
         setUser({ email: null });
       }

@@ -1,21 +1,18 @@
 import { FC, useEffect, useState } from "react";
 import requests from "../Requests";
 import axios from "axios";
+
+export type MovieObj = {
+  readonly id: number;
+  title: string;
+  backdrop_path: string;
+  overview: string;
+  release_date: string;
+};
 const Main: FC = () => {
-  const [movies, setMovies] = useState<string[]>([]);
+  const [movies, setMovies] = useState<MovieObj[]>([]);
 
-  type Movie = {
-    title?: string;
-    backdrop_path?: string;
-    overview?: string;
-    release_date?: string;
-  };
-
-  const movie: Movie = movies[
-    Math.floor(Math.random() * movies.length)
-  ] as Movie;
-
-  console.log("type  " + typeof movie);
+  const movie: MovieObj = movies[Math.floor(Math.random() * movies.length)];
 
   useEffect(() => {
     const popularMovies = async () => {
@@ -25,6 +22,14 @@ const Main: FC = () => {
     popularMovies();
   }, []);
 
+  const truncateString = (str: string, num: number): string | undefined => {
+    if (!str) return;
+    if (str.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
+  };
   return (
     <div className="w-full h-[500px] text-white mb-3">
       <div className="w-full h-full">
@@ -49,7 +54,7 @@ const Main: FC = () => {
             Released: {movie?.release_date}
           </p>
           <p className="w-full md:max-w-[70%] lg:max-w-[50%] xl:max-w-[35%] text-gray-200">
-            {movie?.overview?.slice(0, 200) + " ..."}
+            {truncateString(movie?.overview, 200)}
           </p>
         </div>
       </div>

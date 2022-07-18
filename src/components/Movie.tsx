@@ -3,9 +3,10 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useAppContext } from "../AppProvider";
 import { db } from "../firebase";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { MovieObj } from "./Main";
 
 interface Props {
-  item: any;
+  item: MovieObj;
 }
 
 const Movie: FC<Props> = ({ item }) => {

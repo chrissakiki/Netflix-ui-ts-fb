@@ -2,13 +2,15 @@ import { FC, useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Movie from "./Movie";
+import { MovieObj } from "./Main";
+
 interface Props {
   title: string;
   fetchURL: string;
 }
 
 const Row: FC<Props> = ({ title, fetchURL }) => {
-  const [movies, setMovies] = useState<string[]>([]);
+  const [movies, setMovies] = useState<MovieObj[]>([]);
 
   const slider = useRef() as React.MutableRefObject<HTMLInputElement>;
 
