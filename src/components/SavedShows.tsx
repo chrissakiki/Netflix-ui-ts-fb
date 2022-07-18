@@ -5,11 +5,11 @@ import { db } from "../firebase";
 import { updateDoc, doc, onSnapshot } from "firebase/firestore";
 import { AiOutlineClose } from "react-icons/ai";
 const SavedShows = () => {
-  interface Movie {
+  type Movie = {
     id: number;
     img: string;
     title: string;
-  }
+  };
   const [movies, setMovies] = useState<Movie[]>([]);
   const { user } = useAppContext();
 
@@ -55,7 +55,7 @@ const SavedShows = () => {
           ref={slider}
           className="w-full h-full overflow-x-scroll whitespace-nowrap  scroll-smooth scrollbar-hide relative"
         >
-          {movies.map((item: any, i: number) => (
+          {movies.map((item: Movie, i: number) => (
             <div
               key={i}
               className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2"

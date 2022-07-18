@@ -5,12 +5,13 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  UserCredential,
 } from "firebase/auth";
 
 type AppContextInterface = {
   user: User;
-  signUp: (email: string, password: string) => any;
-  logIn: (email: string, password: string) => any;
+  signUp: (email: string, password: string) => Promise<UserCredential>;
+  logIn: (email: string, password: string) => Promise<UserCredential>;
   logOut(): void;
 };
 
@@ -28,20 +29,20 @@ const AppProvider: FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User>({ email: null });
   const [loading, setLoading] = useState<boolean>(true);
 
-  const signUp = (email: string, password: string) => {
+  const signUp = (email: string, password: string): Promise<UserCredential> => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const logIn = (email: string, password: string) => {
+  const logIn = (email: string, password: string): Promise<UserCredential> => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logOut = () => {
+  const logOut = (): void => {
     signOut(auth);
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
       if (currentUser) {
         setUser(currentUser);
       } else {
